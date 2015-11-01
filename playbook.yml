@@ -3,3 +3,5 @@
   sudo: yes
   roles:
   - lxc-host
+  - role: lxc-guest
+    user: lxc01
