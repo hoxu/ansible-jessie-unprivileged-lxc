@@ -13,3 +13,8 @@
 - template: src=default.conf.j2 dest=~{{ user }}/.config/lxc/default.conf owner={{ user }} group={{ user }}
 - command: cgm create all {{ user }}
 - shell: cgm chown all {{ user }}  $(id -u {{ user }}) $(id -g {{ user }})
+- shell: "cgm movepid all {{ user }} $$; lxc-create -t download -n {{ user }} -- -d ubuntu -r trusty -a amd64"
+  sudo: yes
+  sudo_user: "{{ user }}"
+  args:
+    creates: ~{{ user }}/.local/share/lxc/{{ user }}/config
