@@ -20,3 +20,13 @@
     creates: ~{{ user }}/.local/share/lxc/{{ user }}/config
 - copy: src=start-lxc.sh dest=~{{ user}}/start-lxc.sh owner={{ user }} group={{ user }} mode=0755
 - cron: name="start lxc" special_time=reboot job="$HOME/start-lxc.sh" user={{ user }}
+- command: lxc-ls --running
+  sudo: yes
+  sudo_user: "{{ user }}"
+  changed_when: False
+  always_run: True
+  register: lxcls
+- command: "~{{ user }}/start-lxc.sh"
+  sudo: yes
+  sudo_user: "{{ user }}"
+  when: user not in lxcls.stdout_lines
