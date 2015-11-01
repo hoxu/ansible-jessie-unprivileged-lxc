@@ -1,2 +1,13 @@
 ---
 - user: name={{ user }} comment="LXC guest"
+- file: path=~{{ user }}/.config/lxc state=directory owner={{ user }} group={{ user }}
+- shell: "grep {{ user }} /etc/subuid |cut -d: -f2"
+  register: subuid
+  changed_when: False
+  always_run: True
+- shell: "grep {{ user }} /etc/subgid |cut -d: -f2"
+  register: subgid
+  changed_when: False
+  always_run: True
+- set_fact: subuid={{ subuid.stdout }} subgid={{ subgid.stdout }}
+- template: src=default.conf.j2 dest=~{{ user }}/.config/lxc/default.conf owner={{ user }} group={{ user }}
