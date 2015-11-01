@@ -11,3 +11,5 @@
   always_run: True
 - set_fact: subuid={{ subuid.stdout }} subgid={{ subgid.stdout }}
 - template: src=default.conf.j2 dest=~{{ user }}/.config/lxc/default.conf owner={{ user }} group={{ user }}
+- command: cgm create all {{ user }}
+- shell: cgm chown all {{ user }}  $(id -u {{ user }}) $(id -g {{ user }})
