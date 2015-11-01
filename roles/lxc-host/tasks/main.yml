@@ -6,3 +6,4 @@
   - libvirt-bin
   - debootstrap
   - cgmanager
+- sysctl: name=kernel.unprivileged_userns_clone value=1
