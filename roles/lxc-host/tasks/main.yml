@@ -1,0 +1,8 @@
+---
+- apt: name={{item}} state=latest
+  with_items:
+  - lxc
+  - bridge-utils
+  - libvirt-bin
+  - debootstrap
+  - cgmanager
