@@ -5,3 +5,4 @@
   - lxc-host
   - role: lxc-guest
     user: lxc01
+    networking: True
