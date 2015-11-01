@@ -18,3 +18,4 @@
   sudo_user: "{{ user }}"
   args:
     creates: ~{{ user }}/.local/share/lxc/{{ user }}/config
+- copy: src=start-lxc.sh dest=~{{ user}}/start-lxc.sh owner={{ user }} group={{ user }} mode=0755
