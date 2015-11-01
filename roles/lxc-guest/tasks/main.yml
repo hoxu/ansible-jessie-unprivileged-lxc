@@ -19,3 +19,4 @@
   args:
     creates: ~{{ user }}/.local/share/lxc/{{ user }}/config
 - copy: src=start-lxc.sh dest=~{{ user}}/start-lxc.sh owner={{ user }} group={{ user }} mode=0755
+- cron: name="start lxc" special_time=reboot job="$HOME/start-lxc.sh" user={{ user }}
