@@ -1,8 +1,9 @@
 ---
 - hosts: all
   sudo: yes
+  vars:
+    networking: True
   roles:
   - lxc-host
   - role: lxc-guest
     user: lxc01
-    networking: True
