@@ -7,6 +7,7 @@
   - debootstrap
   - cgmanager
   - uidmap
+- service: name=cgmanager state=started enabled=yes
 - sysctl: name=kernel.unprivileged_userns_clone value=1
 - sysctl: name=net.ipv4.ip_forward value=1
   when: networking
