@@ -20,6 +20,12 @@
   sudo_user: "{{ user }}"
   args:
     creates: ~{{ user }}/.local/share/lxc/{{ user }}/config
+- lineinfile: dest="~{{ user}}/.local/share/lxc/{{ user }}/config" line="lxc.network.type = veth"
+  when: networking
+- lineinfile: dest="~{{ user}}/.local/share/lxc/{{ user }}/config" line="lxc.network.flags = up"
+  when: networking
+- lineinfile: dest="~{{ user}}/.local/share/lxc/{{ user }}/config" line="lxc.network.link = lxc-bridge-nat"
+  when: networking
 - copy: src=start-lxc.sh dest=~{{ user}}/start-lxc.sh owner={{ user }} group={{ user }} mode=0755
 - cron: name="start lxc" special_time=reboot job="$HOME/start-lxc.sh" user={{ user }}
 - command: lxc-ls --running
