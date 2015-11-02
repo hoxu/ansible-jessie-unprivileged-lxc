@@ -1,6 +1,6 @@
 ---
 - user: name={{ user }} comment="LXC guest"
-- lineinfile: dest=/etc/lxc/lxc-usernet line="{{ user }} veth lxcbr0 10" create=yes
+- lineinfile: dest=/etc/lxc/lxc-usernet line="{{ user }} veth lxc-bridge-nat 10" create=yes
   when: networking
 - file: path=~{{ user }}/.config/lxc state=directory owner={{ user }} group={{ user }}
 - shell: "grep {{ user }} /etc/subuid |cut -d: -f2"
